@@ -13,10 +13,14 @@ import { Equipment } from '../equipment';
 export class EquiAddEditComponent implements OnInit {
   equipmentId!: any;
  equipment: Equipment = new Equipment;
+  role!: any;
+  emailId!: any;
 
   constructor(private _router: ActivatedRoute,private router: Router,private equipmentService:EquipmentService){}
   ngOnInit(): void {
     this.equipmentId=this._router.snapshot.params['id'];
+    this.role=this._router.snapshot.params['role'];
+    this.emailId=this._router.snapshot.params['emailId'];
     console.log(JSON.stringify(this._router.snapshot.params),"param")
     this.equipmentService.getEquipmentById(this.equipmentId).subscribe(
       data=>{
@@ -36,7 +40,7 @@ export class EquiAddEditComponent implements OnInit {
 
   }
   goToEquipmentList(){
-    this.router.navigate(['/equipment'])
+    this.router.navigate([`/header/${this.role}/${this.emailId}/equipment`])
 
   }
 

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { EquiAddEditComponent } from '../equi-add-edit/equi-add-edit.component';
 import { EquipmentService } from '../equipment.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Equipment } from '../equipment';
 
@@ -29,15 +28,19 @@ export interface PeriodicElement {
 export class EquipmentComponent implements OnInit{
 
   equipments: Equipment[] = [];
-  constructor(private _service:EquipmentService, private _router: Router,private fb: FormBuilder,public dialog: MatDialog){}
+  constructor(private _service:EquipmentService,private router: ActivatedRoute, private _router: Router,private fb: FormBuilder,public dialog: MatDialog){}
 
+  role!:string
+  emailId!:string
   ngOnInit(): void
   {
     this.equpimentList();
+    this.role=this.router.snapshot.params['role'];
+    this.emailId=this.router.snapshot.params['emailId'];
   }
 
   gotRegistration(){
-    this._router.navigate(['/registration'])
+    this._router.navigate([`herader/${this.role}/${this.emailId}/registration`])
   }
 
   selectedFile!: File;
@@ -128,7 +131,7 @@ export class EquipmentComponent implements OnInit{
     this.dialog.closeAll();
   }
   updateEquipment(id:number){
-    this._router.navigate(['update-equipment',id])
+    this._router.navigate([`/header/${this.role}/${this.emailId}/update-equipment`,id])
   }
   deleteEquipment(id:number){
     this._service.deleteEquipment(id).subscribe( data => {

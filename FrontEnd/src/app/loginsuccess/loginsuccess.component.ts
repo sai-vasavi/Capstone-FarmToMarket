@@ -10,6 +10,7 @@ export class LoginsuccessComponent implements OnInit{
   ngOnInit(): void {
     this.imagePath
     this.imagePath2
+
   }
   imagePath:string='AboutImage.png'
   imagePath2:string='AboutImage2.png'

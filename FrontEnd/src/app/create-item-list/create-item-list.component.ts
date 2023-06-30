@@ -15,6 +15,7 @@ export class CreateItemListComponent {
 
 id!:number
 emailId!:string
+role!:string
   itemsData: Items[] = [];
   url="./assets/image1.png"
   selectedFile: File | null=null;
@@ -38,6 +39,7 @@ if(e.target.files){
   {
     this.itemsList();
     this.emailId=this.router.snapshot.params['emailId'];
+    this.role=this.router.snapshot.params['role'];
 
   }
 
@@ -66,11 +68,12 @@ if(e.target.files){
   dataValue:any[]=[]
 
   itemRegisterFormSubmit(): void {
+
     const formData = this.itemsForm.value;
     formData.photo=this.selectedFile;
     console.log(JSON.stringify(this.itemsForm.value)+'dataItem');
 
-    console.log('dataItem calling'+JSON.stringify(this.selectedFile));
+    console.log('dataItem calling'+JSON.stringify(this.emailId));
 
 
     this._service.AddItemsFromRemote(formData,this.emailId).subscribe(
@@ -99,7 +102,7 @@ if(e.target.files){
     this.dialog.closeAll();
   }
   updateItem(id:number){
-    this._router.navigate(['/header/edit-item',id])
+    this._router.navigate([`/header/${this.role}/${this.emailId}/edit-item`,id])
   }
   deleteItem(id:number){
     this._service.deleteItem(id).subscribe( data => {

@@ -10,11 +10,15 @@ import { ItemsServiceService } from '../items-service.service';
 })
 export class EditItemComponent implements OnInit{
   id!: any;
+  role!: string;
+  emailId!: string;
   itemsData: Items = new Items;
 
    constructor(private _router: ActivatedRoute,private router: Router,private itemService:ItemsServiceService){}
    ngOnInit(): void {
      this.id=this._router.snapshot.params['id'];
+     this.role=this._router.snapshot.params['role'];
+     this.emailId=this._router.snapshot.params['emailId'];
      console.log(JSON.stringify(this._router.snapshot.params),"param")
      this.itemService.getItemById(this.id).subscribe(
        data=>{
@@ -34,7 +38,7 @@ export class EditItemComponent implements OnInit{
 
    }
    goToItemList(){
-     this.router.navigate(['/create-item-list'])
+     this.router.navigate([`/header/${this.role}/${this.emailId}/create-item-list`])
 
    }
 

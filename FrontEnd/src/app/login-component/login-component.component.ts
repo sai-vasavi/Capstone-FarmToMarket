@@ -34,7 +34,7 @@ closeDialog(){
     this._service.loginUserFromRemote(this.user).subscribe(
 
   data=>{console.log("response received" ,this.user.role)
-  this._router.navigate([`/header/${this.user.role}/${this.user.emailId}/loginsuccess`,this.user.role])
+  this._router.navigate([`header/${this.user.role}/${this.user.emailId}/loginsuccess`,this.role,this.emailId])
 },
   error=>{console.log("response received")
 this.msg="Bad credential"}
