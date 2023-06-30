@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row" style="gap: 20px; margin-bottom: 150px; margin-top: 50px">
+    <ng-container *ngFor="let item of items">
+      <div class="card col-md-3" style="background-color: white">
+        <img
+          src="./assets/{{ item.photo }}"
+          alt=""
+          style="border: 1px solid black; margin-top: 20px"
+        />
+        <div style="text-align: center">
+          <h3
+            style="
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              max-width: 100ch;
+            "
+          >
+            {{ item.name }}
+          </h3>
+
+          <strong
+            ><a href="" style="color: black"
+              >Farmer_{{ item.user.id }}</a
+            ></strong
+          >
+        </div>
+        <button
+          class="btn"
+          style="
+            background-color: rgb(164, 163, 159);
+            color: white;
+            margin-top: 20px;
+            margin-bottom: 20px;
+          "
+        >
+          Order
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</div>

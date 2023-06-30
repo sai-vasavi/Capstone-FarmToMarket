@@ -1,0 +1,242 @@
+<button
+  type="button"
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#loginModal2"
+  style="width: 20ch; margin-top: 50px; margin-bottom: 50px"
+>
+  New Equipment
+</button>
+
+<table class="table table-striped" style="margin-bottom: 200px">
+  <thead>
+    <tr>
+      <th style="background-color: rgb(14, 121, 198); color: white">
+        equipmentname
+      </th>
+      <th style="background-color: rgb(14, 121, 198); color: white">eImage</th>
+      <th style="background-color: rgb(14, 121, 198); color: white">estate</th>
+      <th style="background-color: rgb(14, 121, 198); color: white">rentDay</th>
+      <th style="background-color: rgb(14, 121, 198); color: white">actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of equipments">
+      <td>{{ item.equipmentname }}</td>
+      <td>{{ item.eImage }}</td>
+      <td>{{ item.estate }}</td>
+      <td>{{ item.rentDay }}</td>
+      <td>
+        <button
+          (click)="updateEquipment(item.equipmentId)"
+          class="btn"
+          style="width: 10ch; background-color: rgb(58, 161, 202); color: white"
+        >
+          Edit
+        </button>
+        <button
+          (click)="deleteEquipment(item.equipmentId)"
+          class="btn btn-danger"
+          style="margin-left: 30px"
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!---Model-->
+
+<div
+  class="modal fade"
+  id="loginModal2"
+  tabindex="-1"
+  aria-labelledby="loginModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Registration Form</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form
+          [formGroup]="equipmentForm"
+          (ngSubmit)="registerFormSubmit()"
+          class="row g-3"
+        >
+          <div class="col-md-6">
+            <label for="id_equipmentname" class="form-label">
+              Equipment Name</label
+            >
+            <input
+              formControlName="equipmentname"
+              [class.is-invalid]="
+                equipmentname.touched && equipmentname.invalid
+              "
+              type="equipmentname"
+              class="form-control"
+              id="id_equipmentname"
+            />
+            <div *ngIf="equipmentname.invalid && equipmentname.touched">
+              <div
+                *ngIf="equipmentname.errors?.['required']"
+                class="d-block invalid-feedback"
+              >
+                Please provide a equipmentname.
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="id_eImage" class="form-label">Image</label>
+            <input
+              formControlName="eImage"
+              [class.is-invalid]="eImage.touched && eImage.invalid"
+              type="file"
+              class="form-control"
+              id="file"
+            />
+            <div
+              *ngIf="eImage.touched && eImage.errors?.['required']"
+              class="d-block invalid-feedback"
+            >
+              Provide eImage
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="id_ecount" class="form-label">ecount</label>
+            <input
+              formControlName="ecount"
+              type="text"
+              class="form-control"
+              id="id_ecount"
+              required
+            />
+            <div
+              *ngIf="ecount.touched && ecount.errors?.required"
+              class="d-block invalid-feedback"
+            >
+              Provide your count
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="enumber" class="form-label">phone number</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="enumber"
+              id="id_enumber"
+              required
+            />
+            <div
+              *ngIf="enumber.touched && enumber.errors?.['required']"
+              class="d-block invalid-feedback"
+            >
+              Provide your phonenumber.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="id_rentDay" class="form-label">rentDay</label>
+            <input
+              formControlName="rentDay"
+              [class.is-invalid]="rentDay.touched && rentDay.invalid"
+              type="rentDay"
+              class="form-control"
+              id="id_rentDay"
+            />
+            <div
+              *ngIf="rentDay.touched && rentDay.errors?.['required']"
+              class="d-block invalid-feedback"
+            >
+              Provide a rentDay.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="id_evillage" class="form-label">village</label>
+            <input
+              formControlName="evillage"
+              [class.is-invalid]="evillage.touched && evillage.invalid"
+              type="evillage"
+              class="form-control"
+              id="id_evillage"
+            />
+            <div
+              *ngIf="evillage.touched && evillage.errors?.required"
+              class="d-block invalid-feedback"
+            >
+              Please Enter evillage
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <label for="id_estate" class="form-label">estate</label>
+            <input
+              formControlName="estate"
+              type="text"
+              class="form-control"
+              id="estate"
+              required
+            />
+            <div
+              *ngIf="estate.touched && estate.errors?.required"
+              class="d-block invalid-feedback"
+            >
+              Provide your state.
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label for="id_ecity" class="form-label">ecity</label>
+            <input
+              formControlName="ecity"
+              type="text"
+              class="form-control"
+              id="id_ecity"
+              required
+            />
+            <div
+              *ngIf="ecity.touched && ecity.errors?.required"
+              class="d-block invalid-feedback"
+            >
+              Provide your first name.
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label for="id_epincode" class="form-label">epincode</label>
+            <input
+              formControlName="epincode"
+              type="number"
+              class="form-control"
+              id="id_epincode"
+              required
+            />
+            <div
+              *ngIf="epincode.touched && epincode.errors?.required"
+              class="d-block invalid-feedback"
+            >
+              Provide your pincode.
+            </div>
+          </div>
+          <div class="col-md-6 mt-4">
+            <button type="submit" class="btn btn-primary px-5">Submit</button>
+            <button
+              type="button"
+              class="btn btn-secondary px-3 ms-2"
+              (click)="onNoClick()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

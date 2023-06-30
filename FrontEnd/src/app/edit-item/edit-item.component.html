@@ -1,0 +1,51 @@
+<h2>hello</h2>
+<div class="col-md-6 offset-md-3" style="margin-bottom: 40vh">
+  <h3 style="margin-top: 40px; margin-bottom: 40px">Edit Item</h3>
+  <form (ngSubmit)="onSubmit()">
+    <div class="col-md-6">
+      <label> Item Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        [(ngModel)]="itemsData.name"
+      />
+    </div>
+    <div class="col-md-6">
+      <label>Item Photo</label>
+      <input
+        type="file"
+        class="form-control"
+        id="image"
+        name="image"
+        [(ngModel)]="itemsData.photo"
+      />
+    </div>
+    <div class="col-md-6">
+      <label>Description</label>
+      <input
+        type="text"
+        class="form-control"
+        id="id_description"
+        name="id_description"
+        [(ngModel)]="itemsData.description"
+        required
+      />
+    </div>
+    <div class="col-md-6">
+      <label>Quantity Available</label>
+      <input
+        type="text"
+        id="id_quantityavailable"
+        name="id_quantityavailable"
+        [(ngModel)]="itemsData.quantityavailable"
+        required
+      />
+    </div>
+    <div class="col-md-6 mt-4">
+      <button type="submit" class="btn btn-primary px-5">Submit</button>
+      <button type="button" class="btn btn-secondary px-3 ms-2">Cancel</button>
+    </div>
+  </form>
+</div>

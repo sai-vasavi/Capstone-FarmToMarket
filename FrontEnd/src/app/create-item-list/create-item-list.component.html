@@ -1,0 +1,156 @@
+<button
+  type="button"
+  style="margin-left: 30px"
+  type="button"
+  class="btn btn-primary px-4"
+  data-bs-toggle="modal"
+  data-bs-target="#loginModal3"
+  style="width: 20ch; margin-top: 50px; margin-bottom: 50px"
+>
+  Add New Item
+</button>
+
+<table class="table table-striped" style="margin-bottom: 270px">
+  <thead>
+    <tr>
+      <th>ItemName</th>
+      <th>Photo</th>
+      <th>Description</th>
+      <th>Quantityavailable</th>
+      <th>actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of itemsData">
+      <td>{{ item.name }}</td>
+      <td>
+        <img [src]="item.photo" alt="" style="width: 50px; height: 50px" />
+      </td>
+      <td>{{ item.description }}</td>
+      <td>{{ item.quantityavailable }}</td>
+      <td>
+        <button
+          class="btn"
+          (click)="updateItem(item.id)"
+          style="width: 10ch; background-color: rgb(58, 161, 202); color: white"
+        >
+          Edit
+        </button>
+        <button
+          class="btn btn-danger"
+          (click)="deleteItem(item.id)"
+          style="margin-left: 30px"
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div
+  class="modal fade"
+  id="loginModal3"
+  tabindex="-1"
+  aria-labelledby="loginModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Registration Form</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form
+          [formGroup]="itemsForm"
+          (ngSubmit)="itemRegisterFormSubmit()"
+          class="row g-3"
+        >
+          <div class="col-md-6">
+            <label for="id_name" class="form-label"> Item Name</label>
+            <input
+              formControlName="name"
+              [class.is-invalid]="name.touched && name.invalid"
+              type="text"
+              class="form-control"
+              id="id_name"
+            />
+            <div *ngIf="name.invalid && name.touched">
+              <div
+                *ngIf="name.errors?.['required']"
+                class="d-block invalid-feedback"
+              >
+                Please provide a item name.
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="id_photo" class="form-label">photo</label>
+            <input
+              formControlName="photo"
+              [class.is-invalid]="photo.touched && photo.invalid"
+              type="file"
+              class="form-control"
+              id="file"
+            />
+            <div
+              *ngIf="photo.touched && photo.errors?.['required']"
+              class="d-block invalid-feedback"
+            >
+              Provide photo
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="id_description" class="form-label"
+              >Item Description</label
+            >
+            <input
+              formControlName="description"
+              type="text"
+              class="form-control"
+              id="id_description"
+              required
+            />
+            <div
+              *ngIf="description.touched && description.errors?.required"
+              class="d-block invalid-feedback"
+            >
+              Provide your description
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="quantityavailable" class="form-label"
+              >Item Quantity Available</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              formControlName="quantityavailable"
+              id="id_quantityavailable"
+              required
+            />
+            <div
+              *ngIf="quantityavailable.touched && quantityavailable.errors?.['required']"
+              class="d-block invalid-feedback"
+            >
+              Provide your quantityavailable.
+            </div>
+          </div>
+          <div class="col-md-6 mt-4">
+            <button type="submit" class="btn btn-primary px-5">Submit</button>
+            <button type="button" class="btn btn-secondary px-3 ms-2">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
